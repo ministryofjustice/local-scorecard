@@ -11,7 +11,7 @@
     "watch-poll": "npx mix watch -- --watch-options-poll=1000",
     "hot": "npx mix watch --hot",
     "prod": "npm run production",
-    "production": "npx mix --production"
+    "production": "npx mix --production && rm -rf node_modules"
   },
   "repository": {
     "type": "git",
