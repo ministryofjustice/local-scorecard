@@ -1,0 +1,35 @@
+{
+  "name": "local-scorecard",
+  "version": "1.0.0",
+  "description": "Local scorecard displaying court statistics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run development",
+    "development": "npx mix",
+    "watch": "npx mix watch",
+    "watch-poll": "npx mix watch -- --watch-options-poll=1000",
+    "hot": "npx mix watch --hot",
+    "prod": "npm run production",
+    "production": "npx mix --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ministryofjustice/local-scorecard.git"
+  },
+  "author": "Ministry of Justice D&T",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ministryofjustice/local-scorecard/issues"
+  },
+  "homepage": "https://github.com/ministryofjustice/local-scorecard#readme",
+  "devDependencies": {
+    "laravel-mix": "^6.0.39",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.49.7",
+    "sass-loader": "^12.4.0"
+  },
+  "dependencies": {
+    "govuk-frontend": "^4.0.0"
+  }
+}
