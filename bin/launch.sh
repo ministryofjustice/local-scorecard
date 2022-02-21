@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ ! -d "./assets" ]]; then
-  ./bin/build.sh development
-  sleep 2
-fi
-
 # bring docker online (background)
 docker compose up -d
 

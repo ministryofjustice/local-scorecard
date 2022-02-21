@@ -1,13 +1,15 @@
+default: push
+
 IMAGE := ministryofjustice/local-scorecard
 TAG := 1.1
-
-.built-image: Dockerfile makefile
-	docker build -t $(IMAGE) .
-	touch .built-image
 
 push: .built-image
 	docker tag $(IMAGE) $(IMAGE):$(TAG)
 	docker push $(IMAGE):$(TAG)
+
+.built-image: Dockerfile Makefile build-prod
+	docker build -t $(IMAGE) .
+	touch .built-image
 
 build:
 	bin/build.sh development
@@ -15,5 +17,8 @@ build:
 build-prod:
 	bin/build.sh production
 
-launch:
+launch: build
 	bin/launch.sh
+
+clean:
+	@if [ -d ".git" ]; then git clean -xdf --exclude ".idea"; fi
