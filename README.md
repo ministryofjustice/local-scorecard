@@ -2,17 +2,21 @@
 
 ## Installation
 
+When developing
+
 ```
-npm install
+make launch
 ```
+or...
 
 Development:
+
 ```
-npm run dev
+make build
 ```
 
 Production:
 
 ```
-npm run prod
+make build-prod
 ```
