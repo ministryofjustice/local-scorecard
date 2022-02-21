@@ -1,2 +1,3 @@
-FROM bitnami/nginx:1.19
+FROM nginx:alpine
 COPY index.html /app/index.html
+COPY assets/* /app/assets
