@@ -1,6 +1,6 @@
 .built-image
 .idea
-assets
+dist
 node_modules
 mix-manifest.json
 package-lock.json

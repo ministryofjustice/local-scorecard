@@ -6,7 +6,7 @@ if [[ -d "./assets" ]]; then
   if [[ -d "./node_modules" ]]; then
     rm -r ./node_modules
   fi
-  rm -r ./assets ./mix-manifest.json ./package-lock.json
+  rm -r ./dist ./mix-manifest.json ./package-lock.json
 fi
 
 npm install
