@@ -1,0 +1,30 @@
+name: Continuous Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: make && echo ${IMAGE}
+
+      - name: Push to ECR
+        id: ecr
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+          region: eu-west-2
+          local-image: ${IMAGE}
+          image: ${{ secrets.ECR_NAME }}:${{ github.sha }}
+      - name: Update image tag
+        env:
+          ECR_URL: ${{ secrets.ECR_URL }}
+        run: export IMAGE_TAG=${{ github.sha }} && cat kubectl_deploy/deployment.tpl | envsubst > kubectl_deploy/deployment.yaml

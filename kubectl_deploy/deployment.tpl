@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: local-scorecard
-        image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/central-digital-developers/courts-local-scorecard-dev-ecr:1.2
+        image: ${ECR_URL}:${IMAGE_TAG}
         ports:
         - containerPort: 8080
