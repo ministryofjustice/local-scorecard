@@ -1,2 +1,2 @@
 FROM nginx:alpine
-COPY dist/* /app
+COPY dist/ /app
