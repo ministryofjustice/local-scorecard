@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: local-scorecard
-        image: ministryofjustice/local-scorecard:1.1
+        image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/central-digital-developers/courts-local-scorecard-dev-ecr:1.2
         ports:
         - containerPort: 8080

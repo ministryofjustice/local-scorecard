@@ -1,11 +1,12 @@
 default: push
 
 IMAGE := ministryofjustice/local-scorecard
-TAG := 1.1
+REPO := 754256621582.dkr.ecr.eu-west-2.amazonaws.com/central-digital-developers/courts-local-scorecard-dev-ecr
+TAG := 1.2
 
 push: .built-image
-	docker tag $(IMAGE) $(IMAGE):$(TAG)
-	docker push $(IMAGE):$(TAG)
+	docker tag $(IMAGE) $(REPO):$(TAG)
+	docker push $(REPO):$(TAG)
 
 .built-image: Dockerfile Makefile build-prod
 	docker build -t $(IMAGE) .

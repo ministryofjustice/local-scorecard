@@ -17,5 +17,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: rubyapp-service
+          serviceName: local-scorecard-service
           servicePort: 4567

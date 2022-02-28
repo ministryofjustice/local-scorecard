@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: crown-court-local-scorecard-service
+  name: local-scorecard-service
   labels:
-    app: crown-court-local-scorecard-service
+    app: local-scorecard-service
 spec:
   ports:
-  - port: 4567
+  - port: 8080
     name: http
-    targetPort: 4567
+    targetPort: 8080
   selector:
     app: crown-court-local-scorecard
