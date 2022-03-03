@@ -11,8 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.sass('src/app.scss', 'dist/css')
-    .copy('src/index.html', 'dist/index.html')
-    .copy('node_modules/govuk-frontend/govuk/all.js', 'dist/js/govuk.js')
-    .copy('node_modules/govuk-frontend/govuk/assets/images', 'dist/images')
-    .copy('node_modules/govuk-frontend/govuk/assets/fonts', 'dist/fonts');
+mix.copy('src/index.html', 'dist/index.html')
+    .copy('node_modules/govuk-frontend/govuk/all.js', 'dist/assets/js/govuk.js')
+    .copy('node_modules/govuk-frontend/govuk/assets/images', 'dist/assets/images')
+    .copy('node_modules/govuk-frontend/govuk/assets/fonts', 'dist/assets/fonts')
+    .sass('src/app.scss', 'dist/css');
