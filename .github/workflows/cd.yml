@@ -23,7 +23,7 @@ jobs:
           secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
           region: eu-west-2
           local-image: ministryofjustice/local-scorecard
-          image: ${{ secrets.ECR_URL }}:${{ github.sha }}
+          image: ${{ secrets.ECR_NAME }}:${{ github.sha }}
       - name: Update image tag
         env:
           ECR_URL: ${{ secrets.ECR_URL }}
