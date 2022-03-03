@@ -1,2 +1,2 @@
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged
 COPY dist/ /app

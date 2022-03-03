@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crown-court-local-scorecard
+  name: courts-local-scorecard-dev
 spec:
   replicas: 1  
   selector:
     matchLabels:
-      app: crown-court-local-scorecard
+      app: courts-local-scorecard-dev
   template:
     metadata:
       labels:
-        app: crown-court-local-scorecard
+        app: courts-local-scorecard-dev
     spec:
       containers:
       - name: local-scorecard

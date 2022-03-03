@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: local-scorecard-service
   labels:
-    app: local-scorecard-service
+    app: courts-local-scorecard-dev
 spec:
   ports:
   - port: 8080
     name: http
     targetPort: 8080
   selector:
-    app: crown-court-local-scorecard
+    app: courts-local-scorecard
