@@ -10,7 +10,6 @@ push: .built-image
 
 .built-image: Dockerfile Makefile build-prod
 	docker build -t $(IMAGE) .
-	touch .built-image
 
 build:
 	bin/build.sh development

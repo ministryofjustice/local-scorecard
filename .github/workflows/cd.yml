@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
-        run: make && echo ${IMAGE}
+        run: make
 
       - name: Push to ECR
         id: ecr
@@ -22,7 +22,7 @@ jobs:
           access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
           region: eu-west-2
-          local-image: ${IMAGE}
+          local-image: ${{IMAGE}}
           image: ${{ secrets.ECR_NAME }}:${{ github.sha }}
       - name: Update image tag
         env:
