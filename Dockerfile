@@ -1,2 +1,2 @@
 FROM nginxinc/nginx-unprivileged
-COPY dist/ /app
+COPY dist/ /usr/share/nginx/html
