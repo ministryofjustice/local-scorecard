@@ -10,4 +10,4 @@ spec:
     name: http
     targetPort: 8080
   selector:
-    app: courts-local-scorecard
+    app: courts-local-scorecard-dev
