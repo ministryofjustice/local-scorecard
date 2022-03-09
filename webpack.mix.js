@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix_ = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,8 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.copy('src/index.html', 'dist/index.html')
+mix_.copy('src/index.html', 'dist/index.html')
+    .copy('src/judiciary-icon.png', 'dist/judiciary-icon.png')
     .copy('node_modules/govuk-frontend/govuk/all.js', 'dist/assets/js/govuk.js')
     .copy('node_modules/govuk-frontend/govuk/assets/images', 'dist/assets/images')
     .copy('node_modules/govuk-frontend/govuk/assets/fonts', 'dist/assets/fonts')
-    .sass('src/app.scss', 'dist/css');
+    .sass('src/app.scss', 'dist/assets/css');
