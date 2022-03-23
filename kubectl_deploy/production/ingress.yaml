@@ -9,12 +9,30 @@ metadata:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location = /.well-known/security.txt {
+        auth_basic off;
+        return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
+      }
 spec:
   tls:
   - hosts:
     - courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
+  - hosts:
+    - criminal-justice-scorecard.justice.gov.uk
+    secretName: courts-local-scorecard-cert-secret
   rules:
   - host: courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: local-scorecard-service
+            port:
+              number: 8080
+  - host: criminal-justice-scorecard.justice.gov.uk
     http:
       paths:
       - path: /
