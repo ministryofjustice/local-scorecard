@@ -11,8 +11,7 @@ const mix_ = require('laravel-mix');
  |
  */
 
-mix_.copy('src/index.html', 'dist/index.html')
-    .copy('src/accessibility.html', 'dist/accessibility.html')
+mix_.copy('src/*.html', 'dist')
     .copy('src/judiciary-icon.png', 'dist/judiciary-icon.png')
     .copy('src/logos', 'dist/assets/images/')
     .copy('src/documents', 'dist/assets/documents/')
