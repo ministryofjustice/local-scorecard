@@ -15,6 +15,7 @@ mix_.copy('src/index.html', 'dist/index.html')
     .copy('src/accessibility.html', 'dist/accessibility.html')
     .copy('src/judiciary-icon.png', 'dist/judiciary-icon.png')
     .copy('src/logos', 'dist/assets/images/')
+    .copy('src/documents', 'dist/assets/documents/')
     .copy('node_modules/govuk-frontend/govuk/assets/images', 'dist/assets/images')
     .copy('node_modules/govuk-frontend/govuk/assets/fonts', 'dist/assets/fonts')
     .sass('src/app.scss', 'dist/assets/css');
