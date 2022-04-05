@@ -11,10 +11,10 @@ const mix_ = require('laravel-mix');
  |
  */
 
-mix_.js('src/assets/app.js', 'dist/assets/js')
-    .sass('src/assets/app.scss', 'dist/assets/css')
+mix_.js('src/resources/app.js', 'dist/assets/js')
+    .sass('src/resources/app.scss', 'dist/assets/css')
     .copy('src/*.html', 'dist')
-    .copy('src/assets/judiciary-icon.png', 'dist/judiciary-icon.png')
+    .copy('src/resources/judiciary-icon.png', 'dist/judiciary-icon.png')
     .copy('src/logos', 'dist/assets/images/')
     .copy('src/documents', 'dist/assets/documents/')
     .copy('node_modules/govuk-frontend/govuk/assets/images', 'dist/assets/images')
