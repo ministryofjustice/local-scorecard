@@ -30,6 +30,7 @@
     "sass-loader": "^12.4.0"
   },
   "dependencies": {
-    "govuk-frontend": "^4.0.0"
+    "govuk-frontend": "^4.0.0",
+    "iframe-resizer": "^4.3.2"
   }
 }
