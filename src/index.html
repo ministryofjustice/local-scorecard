@@ -33,6 +33,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XY07YLK2SE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag () {dataLayer.push(arguments);}
 
         gtag('js', new Date());
@@ -116,16 +117,13 @@
             </div>
         </div>
         <div id="main-content" class="tableauPlaceholder"
-             style="width: 1225px; position: relative; overflow: hidden; display: block;">
-            <noscript><a href='#'>
+             style="width: 1250px; position: relative; overflow: hidden; display: block;">
+            <noscript>
                 <img alt=''
                      src='https://public.tableau.com/app/profile/moj.analysis/viz/CJSScorecard/Introduction/1_rss.png'
                      style='border: none'/></a>
             </noscript>
-            <iframe title="Data Visualisation" allowtransparency="true"
-                    allow="fullscreen" class="tableauViz" width="1225px" height="8300px"
-                    style="display: block; margin: 0; padding: 0; border: none; width: 1225px; height: 8300px;"
-                    src="https://public.tableau.com/views/CJSScorecard/Introduction?:embed=yes&amp;:showVizHome=no&amp;:host_url=https%3A%2F%2Fpublic.tableau.com%2F&amp;:tabs=yes&amp;:toolbar=yes&amp;:animate_transition=yes&amp;:display_spinner=no&amp;:display_static_image=no&amp;:loadOrderID=0"></iframe>
+            <div id="scorecard"></div>
         </div>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
@@ -137,7 +135,8 @@
                         in the <a href="assets/documents/data_note.pdf">data note.</a>
                     </p>
                     <p class="govuk-body">
-                        A <a href="assets/documents/2022-04-11 15_35_27 data_for_csv.csv">CSV file of the data within the
+                        A <a href="assets/documents/2022-04-11 15_35_27 data_for_csv.csv">CSV file of the data within
+                        the
                         dashboard</a> is available to download.
                     </p>
                 </div>
@@ -177,5 +176,6 @@
         </div>
     </div>
 </footer>
+<script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
