@@ -4,7 +4,7 @@ const viz = new TableauViz();
 
 const scorecard = {
     init: () => {
-        viz.src = 'https://prod-uk-a.online.tableau.com/t/localcjsscorecard/views/2203CJSScorecard5pm_testforDamien/Introduction';
+        viz.src = 'https://prod-uk-a.online.tableau.com/t/localcjsscorecard/views/TestforDamien/Introduction';
         viz.toolbar = 'hidden';
 
         document.getElementById('scorecard').appendChild(viz);
