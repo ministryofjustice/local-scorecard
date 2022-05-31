@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: courts-local-scorecard-dev-ingress
+  namespace: courts-local-scorecard-dev
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    external-dns.alpha.kubernetes.io/set-identifier: courts-local-scorecard-dev-ingress-courts-local-scorecard-dev-green
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
+    nginx.ingress.kubernetes.io/permanent-redirect: https://dev.criminal-justice-delivery-data-dashboards.justice.gov.uk
+spec:
+  tls:
+    - hosts:
+        - courts-local-scorecard-dev.apps.live.cloud-platform.service.justice.gov.uk
+    - hosts:
+        - dev.criminal-justice-scorecard.justice.gov.uk
+      secretName: courts-local-scorecard-cert-secret
+  rules:
+    - host: courts-local-scorecard-dev.apps.live.cloud-platform.service.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: local-scorecard-service
+                port:
+                  number: 8080
+    - host: dev.criminal-justice-scorecard.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: local-scorecard-service
+                port:
+                  number: 8080
