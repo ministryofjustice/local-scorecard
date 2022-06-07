@@ -5,24 +5,43 @@ metadata:
   namespace: courts-local-scorecard-dev
   annotations:
     kubernetes.io/ingress.class: nginx
-    external-dns.alpha.kubernetes.io/set-identifier: criminal-justice-delivery-dev-ingress-criminal-justice-delivery-dev-green
+    external-dns.alpha.kubernetes.io/set-identifier: criminal-justice-delivery-dev-ingress-courts-local-scorecard-dev-green
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
     nginx.ingress.kubernetes.io/server-snippet: |
+      if ($host = 'courts-local-scorecard-dev.apps.live.cloud-platform.service.justice.gov.uk') {
+        return 301 https://dev.criminal-justice-delivery-data-dashboards.justice.gov.uk;
+      }
+      if ($host = 'dev.criminal-justice-scorecard.justice.gov.uk') {
+        return 301 https://dev.criminal-justice-delivery-data-dashboards.justice.gov.uk;
+      }
       location = /.well-known/security.txt {
         auth_basic off;
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
       }
 spec:
   tls:
-    - hosts:
-        - courts-local-scorecard-dev.apps.live.cloud-platform.service.justice.gov.uk
-    - hosts:
-        - dev.criminal-justice-delivery-data-dashboards.justice.gov.uk
-      secretName: criminal-justice-delivery-cert-secret
+  - hosts:
+    - courts-local-scorecard-dev.apps.live.cloud-platform.service.justice.gov.uk
+  - hosts:
+    - dev.criminal-justice-scorecard.justice.gov.uk
+    secretName: courts-local-scorecard-cert-secret
+  - hosts:
+    - dev.criminal-justice-delivery-data-dashboards.justice.gov.uk
+    secretName: criminal-justice-delivery-cert-secret
   rules:
   - host: courts-local-scorecard-dev.apps.live.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: local-scorecard-service
+            port:
+              number: 8080
+  - host: dev.criminal-justice-scorecard.justice.gov.uk
     http:
       paths:
       - path: /
