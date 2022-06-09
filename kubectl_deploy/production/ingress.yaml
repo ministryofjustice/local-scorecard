@@ -1,13 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: courts-local-scorecard-prod-ingress
+  name: criminal-justice-delivery-prod-ingress
   namespace: courts-local-scorecard-prod
   annotations:
     kubernetes.io/ingress.class: nginx
-    external-dns.alpha.kubernetes.io/set-identifier: courts-local-scorecard-prod-ingress-courts-local-scorecard-prod-green
+    external-dns.alpha.kubernetes.io/set-identifier: criminal-justice-delivery-prod-ingress-courts-local-scorecard-prod-green
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/server-snippet: |
+      if ($host = 'courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk') {
+        return 301 https://criminal-justice-delivery-data-dashboards.justice.gov.uk;
+      }
+      if ($host = 'criminal-justice-scorecard.justice.gov.uk') {
+        return 301 https://criminal-justice-delivery-data-dashboards.justice.gov.uk;
+      }
       location = /.well-known/security.txt {
         auth_basic off;
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
@@ -19,6 +25,9 @@ spec:
   - hosts:
     - criminal-justice-scorecard.justice.gov.uk
     secretName: courts-local-scorecard-cert-secret
+  - hosts:
+    - criminal-justice-delivery-data-dashboards.justice.gov.uk
+    secretName: criminal-justice-delivery-cert-secret
   rules:
   - host: courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
     http:
@@ -40,3 +49,13 @@ spec:
             name: local-scorecard-service
             port:
               number: 8080
+  - host: criminal-justice-delivery-data-dashboards.justice.gov.uk
+    http:
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: local-scorecard-service
+              port:
+                number: 8080
