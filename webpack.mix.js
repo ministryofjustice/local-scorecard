@@ -13,7 +13,6 @@ const mix_ = require('laravel-mix');
 
 mix_.js('src/resources/app.js', 'dist/assets/js')
     .js('src/resources/functions', 'dist/assets/js')
-    .js('src/resources/tableau-embedding-3.js', 'dist/assets/js')
     .sass('src/resources/app.scss', 'dist/assets/css')
     .copy('src/*.html', 'dist')
     .copy('src/resources/judiciary-icon.png', 'dist/judiciary-icon.png')
