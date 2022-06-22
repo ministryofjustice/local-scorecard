@@ -24,7 +24,9 @@ let app = {
         }
     },
     get: {
-        height: () => viz.height
+        sheet: () => viz.getWorkbook().getActiveSheet(),
+        height: () => app.get.sheet().getSize().maxSize.height,
+        name: () => app.get.sheet().getName()
     },
     set: {
         name: (name) => app.current.sheet.name = name,
@@ -33,10 +35,9 @@ let app = {
             app.current.sheet.height = height;
         }
     },
-    log: (msg, value, color) => {
-        color = color || 'black';
-
-        switch (color) {
+    log: (msg, value, type) => {
+        let color = 'black'
+        switch (type) {
             case 'success':
                 color = 'Green';
                 break;
@@ -66,23 +67,23 @@ let app = {
     },
     interact: {
         tab: () => {
-            let sheet = viz.getWorkbook().getActiveSheet();
-            let name = sheet.getName();
-            let size = sheet.getSize().maxSize;
-
             if (app.current.sheet.name) {
                 arrow = '--> ';
                 app.log('------------');
-                app.log(arrow + 'We switched tabs from ' + app.current.sheet.name + ' to ' + name, null, 'success');
+                app.log(
+                    arrow + 'We switched tabs from ' + app.current.sheet.name + ' to ' + app.get.name(),
+                    null,
+                    'success'
+                );
             }
 
             app.log(
                 arrow + 'Setting iframe height to:',
-                size.height
+                app.get.height()
             );
 
-            app.set.height(size.height + 100);
-            app.set.name(name);
+            app.set.height( app.get.height() + 100 );
+            app.set.name( app.get.name() );
         }
     }
 };
