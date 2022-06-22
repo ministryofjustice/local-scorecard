@@ -1,8 +1,9 @@
-import { scorecard } from "./functions";
+import { app } from "./functions";
 
 // load tableau...
-scorecard.init();
+app.initViz();
 
 // listen for stuff...
-scorecard.listen.firstVizSizeKnown();
-scorecard.listen.firstInteractive();
+//app.listen.firstVizSizeKnown();
+//app.listen.firstInteractive();
+//cjsData.listen.tabSwitch();

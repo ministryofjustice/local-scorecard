@@ -25,10 +25,17 @@ $govuk-global-styles: true;
                 margin-top: 7px;
             }
         }
+    }
 
-
+    #cjsData {
+        iframe {
+            max-width:2250px;
+            min-height: 400px;
+            overflow: hidden;
+        }
     }
 }
+
 .govuk-width-container {
     max-width: 1225px;
 }
