@@ -1,13 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: courts-local-scorecard-prod-ingress
-  namespace: courts-local-scorecard-prod
+  name: criminal-justice-delivery-prod-ingress
+  namespace: courts-local-cjsData-prod
   annotations:
     kubernetes.io/ingress.class: nginx
-    external-dns.alpha.kubernetes.io/set-identifier: courts-local-scorecard-prod-ingress-courts-local-scorecard-prod-green
+    external-dns.alpha.kubernetes.io/set-identifier: criminal-justice-delivery-prod-ingress-courts-local-cjsData-prod-green
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/server-snippet: |
+      if ($host = 'courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk') {
+        return 301 https://criminal-justice-delivery-data-dashboards.justice.gov.uk;
+      }
+      if ($host = 'criminal-justice-scorecard.justice.gov.uk') {
+        return 301 https://criminal-justice-delivery-data-dashboards.justice.gov.uk;
+      }
       location = /.well-known/security.txt {
         auth_basic off;
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
@@ -15,28 +21,41 @@ metadata:
 spec:
   tls:
   - hosts:
-    - courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
+    - courts-local-cjsData-prod.apps.live.cloud-platform.service.justice.gov.uk
   - hosts:
-    - criminal-justice-scorecard.justice.gov.uk
-    secretName: courts-local-scorecard-cert-secret
+    - criminal-justice-cjsData.justice.gov.uk
+    secretName: courts-local-cjsData-cert-secret
+  - hosts:
+    - criminal-justice-delivery-data-dashboards.justice.gov.uk
+    secretName: criminal-justice-delivery-cert-secret
   rules:
-  - host: courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
+  - host: courts-local-cjsData-prod.apps.live.cloud-platform.service.justice.gov.uk
     http:
       paths:
       - path: /
         pathType: ImplementationSpecific
         backend:
           service:
-            name: local-scorecard-service
+            name: local-cjsData-service
             port:
               number: 8080
-  - host: criminal-justice-scorecard.justice.gov.uk
+  - host: criminal-justice-cjsData.justice.gov.uk
     http:
       paths:
       - path: /
         pathType: ImplementationSpecific
         backend:
           service:
-            name: local-scorecard-service
+            name: local-cjsData-service
             port:
               number: 8080
+  - host: criminal-justice-delivery-data-dashboards.justice.gov.uk
+    http:
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: local-cjsData-service
+              port:
+                number: 8080

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: courts-local-scorecard-prod
+  name: courts-local-cjsData-prod
 spec:
   replicas: 2
   revisionHistoryLimit: 5
@@ -12,14 +12,14 @@ spec:
       maxSurge: 100%
   selector:
     matchLabels:
-      app: courts-local-scorecard-prod
+      app: courts-local-cjsData-prod
   template:
     metadata:
       labels:
-        app: courts-local-scorecard-prod
+        app: courts-local-cjsData-prod
     spec:
       containers:
-      - name: local-scorecard
+      - name: local-cjsData
         image: ${ECR_URL}:${IMAGE_TAG}
         ports:
         - containerPort: 8080
