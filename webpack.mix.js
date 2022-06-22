@@ -11,10 +11,12 @@ const mix_ = require('laravel-mix');
  |
  */
 
-mix_.copy('src/*.html', 'dist')
-    .copy('src/judiciary-icon.png', 'dist/judiciary-icon.png')
+mix_.js('src/resources/app.js', 'dist/assets/js')
+    .js('src/resources/functions', 'dist/assets/js')
+    .sass('src/resources/app.scss', 'dist/assets/css')
+    .copy('src/*.html', 'dist')
+    .copy('src/resources/judiciary-icon.png', 'dist/judiciary-icon.png')
     .copy('src/logos', 'dist/assets/images/')
     .copy('src/documents', 'dist/assets/documents/')
     .copy('node_modules/govuk-frontend/govuk/assets/images', 'dist/assets/images')
-    .copy('node_modules/govuk-frontend/govuk/assets/fonts', 'dist/assets/fonts')
-    .sass('src/app.scss', 'dist/assets/css');
+    .copy('node_modules/govuk-frontend/govuk/assets/fonts', 'dist/assets/fonts');
