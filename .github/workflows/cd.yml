@@ -26,7 +26,7 @@ jobs:
           access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
           region: eu-west-2
-          local-image: ministryofjustice/local-cjsData
+          local-image: ministryofjustice/local-scorecard
           image: ${{ secrets.ECR_NAME }}:${{ github.sha }}, ${{ secrets.ECR_NAME }}:dev.latest
 
   deploy-dev:
