@@ -87,7 +87,7 @@ let app = {
             // drop console output
             app.debug.resize();
 
-            //
+            // adjust the interface
             app.set.height( app.get.height() + 100 );
             app.set.name( app.get.name() );
         }
