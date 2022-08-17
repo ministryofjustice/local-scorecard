@@ -2,9 +2,13 @@ import { debug } from './debug';
 
 let app = {
     viz: null,
-    option: { // set for default production
+    /**
+     * Define default production values
+     * Use feature locks to activate for review
+     */
+    option: {
         debug: false,
-        resize: false
+        resize: true
     },
     width: 1225,
     maxHeight: 10050,
@@ -14,11 +18,8 @@ let app = {
         app.set.params();
 
         // debug?
-        debug.active = app.get.param("debug") || app.option.debug;
+        debug.active = app.feature.active('debug');
         debug.init();
-
-        // can we run the resize feature?
-        app.option.resize = app.get.param("resize") || app.option.resize
 
         // launch app...
         if (app.option.resize) {
@@ -65,10 +66,10 @@ let app = {
          */
         param: (key, realValue) => {
             if (!realValue) {
-                switch(app.urlParams[key]?.toLowerCase()?.trim()) {
-                    case "true":
-                    case "yes":
-                    case "1":
+                switch (app.urlParams[key]?.toLowerCase()?.trim()) {
+                    case 'true':
+                    case 'yes':
+                    case '1':
                         return true;
                     default:
                         return false;
@@ -87,7 +88,7 @@ let app = {
         params: () => {
             app.urlParams = new Proxy(new URLSearchParams(window.location.search), {
                 get: (searchParams, prop) => searchParams.get(prop),
-            })
+            });
         }
     },
     listen: {
@@ -115,6 +116,44 @@ let app = {
             // adjust the interface
             app.set.height(app.get.height() + 100);
             app.set.name(app.get.name());
+        }
+    },
+    feature: {
+        /**
+         * Determine if we can activate a feature.
+         * @param feature
+         * @return {boolean}
+         */
+        check: (feature) => {
+            if (typeof app.option[feature] == 'undefined') {
+                debug.log('Feature does not exist: ' + feature, null, 'error');
+                return false;
+            }
+            return true;
+        },
+        /**
+         * Gets a boolean value to determine if we can switch a feature on.
+         *
+         * First, check if the feature exists. Then check if the feature is
+         * present as a URL param <-- this is our activation path. If it is
+         * and the value is truthy, return true. If not, we return the
+         * default value from app.options.
+         *
+         * @example  app.feature.active('debug')
+         * @param feature must be available in app.option
+         * @return {boolean}
+         */
+        active: (feature) => {
+            if (!app.feature.check(feature)) {
+                return false
+            }
+
+            if (app.get.param(feature)) {
+                debug.log('Feature activating: ' + feature, null, 'success');
+                return true
+            }
+
+            return app.option[feature];
         }
     }
 };
