@@ -19,6 +19,7 @@ metadata:
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
       }
 spec:
+  ingressClassName: default
   tls:
   - hosts:
     - courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
