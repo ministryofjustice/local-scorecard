@@ -26,9 +26,6 @@ spec:
   - hosts:
     - criminal-justice-scorecard.justice.gov.uk
     secretName: courts-local-scorecard-cert-secret
-  - hosts:
-    - criminal-justice-delivery-data-dashboards.justice.gov.uk
-    secretName: criminal-justice-delivery-cert-secret
   rules:
   - host: courts-local-scorecard-prod.apps.live.cloud-platform.service.justice.gov.uk
     http:
@@ -50,13 +47,3 @@ spec:
             name: local-scorecard-service
             port:
               number: 8080
-  - host: criminal-justice-delivery-data-dashboards.justice.gov.uk
-    http:
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: local-scorecard-service
-              port:
-                number: 8080
